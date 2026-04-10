@@ -160,7 +160,7 @@ export default function Footer() {
             <p style={{ fontSize:'0.78rem', color:'rgba(255,255,255,0.22)', margin:0 }}>
               Developed &amp; Designed by{' '}
               <a
-                href="https://devnovatech.com/"
+                href="https://devnovatech.co.ke/"
                 target="_blank"
                 rel="noreferrer"
                 style={{ color:'rgba(123,201,74,0.65)', fontWeight:600, textDecoration:'none', transition:'color 0.2s' }}
