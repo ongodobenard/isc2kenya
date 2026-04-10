@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --green: #5aaa32;
+  --green-dark: #3d7a1f;
+  --green-light: #7bc94a;
+  --blue: #2a5298;
+  --blue-dark: #1a3a6e;
+  --white: #ffffff;
+  --off-white: #f8faf6;
+  --gray: #6b7280;
+  --dark: #111827;
+  --text: #1f2937;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; color: var(--text); }
+h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+a { text-decoration: none; color: inherit; }
+html { scroll-behavior: smooth; }
