@@ -7,6 +7,7 @@ import About from './pages/About'
 import Membership from './pages/Membership'
 import Events from './pages/Events'
 import Mentorship from './pages/Mentorship'
+import Gallery from './pages/Gallery'
 import Blog from './pages/Blog'
 import Contact from './pages/Contact'
 
@@ -29,6 +30,7 @@ function App() {
         <Route path="/membership" element={<Membership />} />
         <Route path="/events"     element={<Events />} />
         <Route path="/mentorship" element={<Mentorship />} />
+        <Route path="/gallery"    element={<Gallery />} />
         <Route path="/blog"       element={<Blog />} />
         <Route path="/contact"    element={<Contact />} />
       </Routes>

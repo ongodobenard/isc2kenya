@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState, useRef } from 'react'
 import bgTech from '../assets/bg-tech.jpg'
 import stanley from '../assets/stanley.jpeg'
-import isc2gether from '../assets/isc2gether-banner.png'   // ← save the image with this name
+import summitFlyer from '../assets/summit-flyer.jpg'
 
 const heroStats = [
   { num: 60, suffix: "+", label: "Registered Members" },
@@ -176,8 +176,8 @@ export default function Home() {
   const [loading, setLoading] = useState(true)
   const [visible, setVisible] = useState(false)
   const [heroCountStart, setHeroCountStart] = useState(false)
-  const [isc2Ref, setIsc2Ref] = useState(null)
-  const [isc2In, setIsc2In] = useState(false)
+  const [summitRef, setSummitRef] = useState(null)
+  const [summitIn, setSummitIn] = useState(false)
 
   const fullText = "Securing Kenya's Digital Future, Together."
   const { displayed, done } = useTypewriter(fullText, 100, 800)
@@ -191,16 +191,15 @@ export default function Home() {
     return () => { clearTimeout(t1); clearTimeout(t2) }
   }, [])
 
-  // IntersectionObserver for ISC2gether section
   useEffect(() => {
-    if (!isc2Ref) return
+    if (!summitRef) return
     const io = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setIsc2In(true); io.disconnect() } },
+      ([e]) => { if (e.isIntersecting) { setSummitIn(true); io.disconnect() } },
       { threshold: 0, rootMargin: '0px 0px -50px 0px' }
     )
-    io.observe(isc2Ref)
+    io.observe(summitRef)
     return () => io.disconnect()
-  }, [isc2Ref])
+  }, [summitRef])
 
   if (loading) return <Loader />
 
@@ -212,13 +211,11 @@ export default function Home() {
         @keyframes slideRight { from{opacity:0;transform:translateX(40px)}  to{opacity:1;transform:translateX(0)} }
         @keyframes cardIn   { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
         @keyframes blink    { 0%,100%{opacity:1} 50%{opacity:0} }
-        @keyframes shimmer  { 0%{background-position:200% center} 100%{background-position:-200% center} }
 
         .hero-section {
           min-height: calc(100vh - 68px);
           display: flex;
           align-items: center;
-          background: linear-gradient(135deg,rgba(10,20,60,0.90) 0%,rgba(26,58,110,0.84) 100%);
           padding: 32px 0 24px;
           box-sizing: border-box;
         }
@@ -251,13 +248,59 @@ export default function Home() {
         .ach-card { text-align:center; padding:clamp(16px,3.5vw,26px) clamp(10px,2vw,16px); border-radius:16px; background:white; border:1px solid #e5e7eb; transition:transform .3s,box-shadow .3s; cursor:default; }
         .ach-card:hover { transform:translateY(-6px); box-shadow:0 16px 40px rgba(90,170,50,.15); }
 
-        /* ISC2gether card */
-        .isc2g-card { border-radius:20px; overflow:hidden; border:1px solid #d1e8b0; box-shadow:0 8px 40px rgba(90,170,50,0.12); transition:box-shadow 0.3s,transform 0.3s; }
-        .isc2g-card:hover { box-shadow:0 16px 56px rgba(90,170,50,0.2); transform:translateY(-4px); }
-        .isc2g-banner { width:100%; display:block; }
-        .isc2g-body { background:white; padding:32px 36px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; }
-        .btn-isc2g { background:#5aaa32; color:white; padding:13px 28px; border-radius:8px; font-weight:700; font-size:0.9rem; display:inline-flex; align-items:center; gap:8px; transition:all .25s; text-decoration:none; white-space:nowrap; }
-        .btn-isc2g:hover { background:#3d7a1f; transform:translateY(-2px); box-shadow:0 8px 28px rgba(90,170,50,0.45); }
+        /* Summit card — identical to Events page */
+        .summit-card {
+          background: white;
+          border-radius: 24px;
+          overflow: hidden;
+          border: 1px solid #e5e7eb;
+          box-shadow: 0 8px 40px rgba(26,58,110,0.10);
+          transition: box-shadow 0.3s, transform 0.3s;
+        }
+        .summit-card:hover {
+          box-shadow: 0 16px 56px rgba(26,58,110,0.16);
+          transform: translateY(-3px);
+        }
+        .summit-card-img {
+          width: 100%;
+          height: auto;
+          display: block;
+          object-fit: contain;
+          background: #0a1440;
+        }
+        .summit-card-body {
+          padding: clamp(20px,4vw,40px);
+        }
+        .summit-badges {
+          display: flex; align-items: center; gap: 10px;
+          margin-bottom: 16px; flex-wrap: wrap;
+        }
+        .summit-detail-row {
+          display: flex; gap: clamp(12px,3vw,24px); flex-wrap: wrap;
+        }
+        .summit-cta-row {
+          display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px;
+        }
+        .cohosts-row {
+          display: flex; align-items: center; gap: 12px;
+          padding: 12px 16px; background: #f8faf6;
+          border-radius: 12px; border: 1px solid #e5e7eb;
+          margin-bottom: 20px; flex-wrap: wrap;
+        }
+        .btn-summit-g {
+          background: #5aaa32; color: white; padding: 13px 28px;
+          border-radius: 8px; font-weight: 600; font-size: 0.9rem;
+          display: inline-flex; align-items: center; gap: 8px;
+          transition: all 0.25s; text-decoration: none;
+        }
+        .btn-summit-g:hover { background: #3d7a1f; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(90,170,50,0.38); }
+        .btn-summit-o {
+          background: transparent; color: #1a3a6e; padding: 13px 28px;
+          border-radius: 8px; font-weight: 600; font-size: 0.9rem;
+          border: 2px solid #1a3a6e; display: inline-flex; align-items: center;
+          gap: 8px; transition: all 0.25s; text-decoration: none;
+        }
+        .btn-summit-o:hover { background: #1a3a6e; color: white; transform: translateY(-2px); }
 
         .president-grid    { display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,5vw,64px); align-items:center; }
         .benefits-grid     { display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(12px,2vw,20px); }
@@ -268,18 +311,19 @@ export default function Home() {
           .achievements-grid { grid-template-columns:repeat(2,1fr) !important; }
         }
         @media(max-width:768px) {
-          .president-grid    { grid-template-columns:1fr !important; }
-          .benefits-grid     { grid-template-columns:repeat(2,1fr) !important; }
+          .president-grid { grid-template-columns:1fr !important; }
+          .benefits-grid  { grid-template-columns:repeat(2,1fr) !important; }
           .achievements-grid { grid-template-columns:repeat(2,1fr) !important; }
-          .hero-title        { font-size: clamp(1.5rem,6vw,2.4rem) !important; min-height: unset !important; }
-          .isc2g-body        { padding: 24px 20px !important; justify-content:center; text-align:center; }
-          .isc2g-ctas        { align-items:center !important; }
+          .hero-title     { font-size: clamp(1.5rem,6vw,2.4rem) !important; min-height: unset !important; }
         }
-        @media(max-width:480px) {
-          .benefits-grid { grid-template-columns:1fr !important; }
-          .hero-btns     { flex-direction:column !important; align-items:stretch !important; }
-          .hero-btns a   { justify-content:center !important; }
-          .hero-stats    { gap: 14px !important; }
+        @media(max-width:600px) {
+          .benefits-grid      { grid-template-columns:1fr !important; }
+          .hero-btns          { flex-direction:column !important; align-items:stretch !important; }
+          .hero-btns a        { justify-content:center !important; }
+          .hero-stats         { gap: 14px !important; }
+          .summit-cta-row     { flex-direction: column !important; }
+          .summit-cta-row a   { justify-content: center !important; width: 100%; box-sizing: border-box; }
+          .summit-detail-row  { flex-direction: column !important; gap: 10px !important; }
         }
       `}</style>
 
@@ -288,7 +332,11 @@ export default function Home() {
         {/* ══ HERO ══ */}
         <section
           className="hero-section"
-          style={{ backgroundImage: `linear-gradient(135deg,rgba(10,20,60,0.90) 0%,rgba(26,58,110,0.84) 100%),url(${bgTech})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+          style={{
+            backgroundImage: `linear-gradient(135deg,rgba(10,20,60,0.90) 0%,rgba(26,58,110,0.84) 100%),url(${bgTech})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
         >
           <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 clamp(24px,5vw,48px)', width: '100%' }}>
             <div style={{ maxWidth: '660px' }}>
@@ -315,54 +363,110 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ══ ISC2GETHER BANNER ══ */}
-        <section ref={el => setIsc2Ref(el)} style={{ padding: 'clamp(44px,6vw,72px) 0', background: '#f0f7eb' }}>
-          <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 clamp(24px,5vw,48px)' }}>
+        {/* ══ UPCOMING SUMMIT — same card as Events page ══ */}
+        <section ref={el => setSummitRef(el)} style={{ padding: 'clamp(44px,6vw,72px) 0', background: '#f8faf6' }}>
+          <div style={{ maxWidth: '860px', margin: '0 auto', padding: '0 clamp(24px,5vw,48px)' }}>
 
-            <div style={{ textAlign: 'center', marginBottom: '28px', opacity: isc2In ? 1 : 0, animation: isc2In ? 'fadeUp 0.6s ease both' : 'none' }}>
+            {/* Section heading */}
+            <div style={{ textAlign: 'center', marginBottom: '28px', opacity: summitIn ? 1 : 0, animation: summitIn ? 'fadeUp 0.6s ease both' : 'none' }}>
               <div style={{ fontSize: '0.74rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#3d7a1f', marginBottom: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
                 <span style={{ display: 'block', width: '24px', height: '2px', background: '#5aaa32' }} />
-                Global Initiative
+                Upcoming Event
                 <span style={{ display: 'block', width: '24px', height: '2px', background: '#5aaa32' }} />
               </div>
-              <h2 style={{ fontSize: 'clamp(1.3rem,2.8vw,2rem)', color: '#111827' }}>We're Part of Something Bigger</h2>
+              <h2 style={{ fontSize: 'clamp(1.3rem,2.8vw,2rem)', color: '#111827' }}>AI, Cybersecurity &amp; Data Summit</h2>
             </div>
 
-            <div className="isc2g-card" style={{ opacity: isc2In ? 1 : 0, animation: isc2In ? 'fadeUp 0.7s ease 0.15s both' : 'none' }}>
-              {/* Banner image */}
+            {/* Card */}
+            <div
+              className="summit-card"
+              style={{ opacity: summitIn ? 1 : 0, animation: summitIn ? 'fadeUp 0.7s ease 0.15s both' : 'none' }}
+            >
+              {/* Full image — never cropped */}
               <img
-                src={isc2gether}
-                alt="ISC2gether April 2026 : Volunteer today, shape tomorrow"
-                className="isc2g-banner"
+                src={summitFlyer}
+                alt="AI, Cybersecurity & Data Summit — ISC2 Kenya Chapter & Data Breed Africa"
+                className="summit-card-img"
               />
 
               {/* Body */}
-              <div className="isc2g-body">
-                <div style={{ flex: 1, minWidth: '240px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                    <span style={{ background: 'rgba(90,170,50,0.12)', color: '#3d7a1f', fontSize: '0.7rem', fontWeight: 700, padding: '3px 10px', borderRadius: '100px' }}>
-                      April 2026
-                    </span>
-                    <span style={{ background: 'rgba(42,82,152,0.1)', color: '#2a5298', fontSize: '0.7rem', fontWeight: 700, padding: '3px 10px', borderRadius: '100px' }}>
-                      Global Event
-                    </span>
-                  </div>
-                  <h3 style={{ fontSize: 'clamp(1rem,2.2vw,1.3rem)', fontWeight: 800, color: '#1a3a6e', marginBottom: '8px' }}>
-                    ISC2gether : Volunteer Today, Shape Tomorrow
-                  </h3>
-                  <p style={{ fontSize: '0.88rem', color: '#6b7280', lineHeight: 1.75, maxWidth: '560px', margin: 0 }}>
-                    ISC2gether is a global volunteer initiative bringing ISC2 members and chapters together in April 2026. As the <strong>ISC2 Kenya Chapter</strong>, we are proud to take part, join us in giving back to our community and shaping the future of cybersecurity in Kenya and beyond.
-                  </p>
+              <div className="summit-card-body">
+
+                {/* Badges */}
+                <div className="summit-badges">
+                  <span style={{ background: 'rgba(220,38,38,0.1)', color: '#dc2626', fontSize: '0.7rem', fontWeight: 700, padding: '4px 12px', borderRadius: '100px' }}>
+                    <i className="fas fa-building" style={{ marginRight: '5px' }} />In-Person
+                  </span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '5px', background: 'rgba(234,179,8,0.12)', color: '#b45309', fontSize: '0.7rem', fontWeight: 700, padding: '4px 12px', borderRadius: '100px' }}>
+                    <i className="fas fa-clock" style={{ fontSize: '0.65rem' }} /> Date TBC
+                  </span>
+                  <span style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 500 }}>
+                    Co-hosted with Data Breed Africa
+                  </span>
                 </div>
 
-                <div className="isc2g-ctas" style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'flex-start' }}>
-                  <a href="https://www.isc2.org/landing/isc2gether" target="_blank" rel="noreferrer" className="btn-isc2g">
-                    <i className="fas fa-hands-helping" /> Get Involved
+                {/* Title */}
+                <h3 style={{ fontSize: 'clamp(1.15rem,2.5vw,1.55rem)', fontWeight: 800, color: '#1a3a6e', lineHeight: 1.25, marginBottom: '6px' }}>
+                  AI, Cybersecurity &amp; Data Summit
+                </h3>
+                <p style={{ fontSize: '1rem', fontWeight: 500, color: '#374151', marginBottom: '20px' }}>
+                  Presented by ISC2 Kenya Chapter &amp; Data Breed Africa
+                </p>
+
+                {/* Postponed notice */}
+                <div style={{
+                  display: 'flex', alignItems: 'flex-start', gap: '12px',
+                  background: 'rgba(234,179,8,0.08)', border: '1px solid rgba(234,179,8,0.35)',
+                  borderRadius: '12px', padding: '14px 18px', marginBottom: '20px',
+                }}>
+                  <i className="fas fa-exclamation-circle" style={{ color: '#b45309', marginTop: '2px', flexShrink: 0 }} />
+                  <div>
+                    <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#92400e', marginBottom: '4px' }}>
+                      Event Postponed
+                    </div>
+                    <div style={{ fontSize: '0.82rem', color: '#78350f', lineHeight: 1.65 }}>
+                      This summit has been postponed. Originally scheduled for <strong>7th May 2026</strong> at Parklands SportsClub (2:00 pm – 8:00 pm). A new date will be announced soon,follow our channels to stay updated.
+                    </div>
+                  </div>
+                </div>
+
+                {/* Description */}
+                <p style={{ fontSize: '0.9rem', color: '#6b7280', lineHeight: 1.8, marginBottom: '20px' }}>
+                  A premier in-person summit bringing together cybersecurity professionals, AI practitioners, and data experts across Kenya and the region. Expect thought leadership sessions, expert panels, and networking with industry leaders, all focused on the intersection of AI, data, and cybersecurity in Africa.
+                </p>
+
+                {/* Co-hosts */}
+                <div className="cohosts-row">
+                  <div style={{ fontSize: '0.8rem', fontWeight: 600, color: '#374151' }}>Co-hosted by:</div>
+                  <span style={{ background: 'rgba(10,20,60,0.08)', color: '#1a3a6e', fontSize: '0.78rem', fontWeight: 700, padding: '4px 12px', borderRadius: '8px' }}>
+                    ISC2 Kenya Chapter
+                  </span>
+                  <span style={{ background: 'rgba(220,38,38,0.08)', color: '#dc2626', fontSize: '0.78rem', fontWeight: 700, padding: '4px 12px', borderRadius: '8px' }}>
+                    Data Breed Africa
+                  </span>
+                </div>
+
+                {/* Details */}
+                <div className="summit-detail-row">
+                  {[
+                    { icon: 'fas fa-calendar',       label: 'New date TBC (was 7 May 2026)' },
+                    { icon: 'fas fa-clock',          label: '2:00 pm – 8:00 pm EAT' },
+                    { icon: 'fas fa-map-marker-alt', label: 'Parklands SportsClub, Nairobi' },
+                  ].map((d, i) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '7px', fontSize: '0.84rem', color: '#374151' }}>
+                      <i className={d.icon} style={{ color: '#5aaa32', width: '14px', flexShrink: 0 }} />
+                      {d.label}
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTAs */}
+                <div className="summit-cta-row">
+                  <a href="mailto:info@isc2kenya.com?subject=AI Cybersecurity Data Summit - Notify Me of New Date" className="btn-summit-g">
+                    <i className="fas fa-bell" /> Get Notified of New Date
                   </a>
-                  <Link to="/membership" style={{ fontSize: '0.82rem', color: '#5aaa32', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px', padding: '0 4px' }}
-                    onMouseEnter={e => e.currentTarget.style.color = '#3d7a1f'}
-                    onMouseLeave={e => e.currentTarget.style.color = '#5aaa32'}>
-                    <i className="fas fa-user-plus" style={{ fontSize: '0.78rem' }} /> Volunteer with Kenya Chapter
+                  <Link to="/events" className="btn-summit-o">
+                    <i className="fas fa-arrow-right" /> View All Events
                   </Link>
                 </div>
               </div>
