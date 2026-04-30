@@ -455,7 +455,7 @@ export default function Gallery() {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundAttachment: 'fixed',
-            filter: 'brightness(0.35) saturate(1.2)',
+            filter: 'brightness(0.65) saturate(1.2)',
             transition: 'opacity 0.8s ease',
           }} />
 
@@ -546,7 +546,7 @@ export default function Gallery() {
               }}
             >
               A visual record of the ISC2 Kenya Chapter's events, volunteer activities,
-              and community gatherings — moments that define our mission to secure
+              and community gatherings, moments that define our mission to secure
               Kenya's digital future.
             </p>
 
@@ -690,7 +690,7 @@ export default function Gallery() {
             backgroundImage: `url(${bgTech})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center bottom',
-            filter: 'brightness(0.25) saturate(1.1)',
+            filter: 'brightness(0.55) saturate(1.1)',
           }} />
           <div style={{
             position: 'absolute', inset: 0,
